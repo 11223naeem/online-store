@@ -99,15 +99,13 @@ h3 {
             </div>
 
             <div>
-                <!-- REMOVE -->
-                <a th:href="@{/remove(index=${iStat.index})}">
-                    <button class="btn">Remove</button>
-                </a>
+				<a th:href="@{/remove(id=${item.id})}">
+				    <button class="btn">Remove</button>
+				</a>
 
-                <!-- SAVE -->
-                <a th:href="@{/save(index=${iStat.index})}">
-                    <button class="btn">Save for Later</button>
-                </a>
+				<a th:href="@{/save(id=${item.id})}">
+				    <button class="btn">Save for Later</button>
+				</a>
             </div>
 
         </div>

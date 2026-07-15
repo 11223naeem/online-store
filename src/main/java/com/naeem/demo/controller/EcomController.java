@@ -74,40 +74,48 @@ public class EcomController {
 	 @RequestMapping("/addToCart")
 	    public String addToCart(@RequestParam String name,
 	                           @RequestParam double price) {
+		 
+		 Cart cart = new Cart(name, price);
 
-	        cartList.add(new Cart(name, price));
+	        cartRepo.save(cart);
 	        return "redirect:/cart";
 	    }
 
 	    // Cart page
 	    @RequestMapping("/cart")
 	    public String cart(Model model) {
+	    	 List<Cart> cartList = cartRepo.findAll();
 
 	        double total = 0;
 
 	        for (Cart c : cartList) {
-	            if (c.getStatus().equals("CART")) {
+	            if ("CART".equals(c.getStatus())) {
 	                total += c.getPrice();
 	            }
 	        }
 
 	        model.addAttribute("cartItems", cartList);
 	        model.addAttribute("total", total);
-
 	        return "cart";
 	    }
 
 	    // Remove item
 	    @RequestMapping("/remove")
-	    public String remove(@RequestParam int index) {
-	        cartList.remove(index);
+	    public String remove(@RequestParam int id) {
+	    	cartRepo.deleteById(id);
 	        return "redirect:/cart";
 	    }
 
 	    // Save for later
 	    @RequestMapping("/save")
-	    public String save(@RequestParam int index) {
-	        cartList.get(index).setStatus("SAVED");
+	    public String save(@RequestParam int id) {
+	    	Cart cart = cartRepo.findById(id).orElse(null);
+
+	        if (cart != null) {
+	            cart.setStatus("SAVED");
+	            cartRepo.save(cart);
+	        }
+
 	        return "redirect:/cart";
 	    }
 	    @GetMapping("/product")
@@ -128,10 +136,10 @@ public class EcomController {
 	    public String buyNow(@RequestParam String name,
 	                         @RequestParam double price) {
 
-	        Cart cart = new Cart(name, price);
+	    	Cart cart = new Cart(name, price);
 	        cart.setStatus("ORDERED");
-	        
-	        cartList.add(cart);
+
+	        cartRepo.save(cart);
 
 	        return "redirect:/cart";
 	    }
@@ -139,10 +147,11 @@ public class EcomController {
 	    @GetMapping("/checkout")
 	    public String checkout() {
 
-	        for (Cart item : cartList) {
-	            if (item.getStatus().equals("CART")) {
-	                item.setStatus("ORDERED");
-	            }
+	    	List<Cart> items = cartRepo.findByStatus("CART");
+
+	        for (Cart item : items) {
+	            item.setStatus("ORDERED");
+	            cartRepo.save(item);
 	        }
 
 	        return "redirect:/cart";
