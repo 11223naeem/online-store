@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Cart</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #efefef;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+/* Sections */
+.section {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+/* Item Row */
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+/* Buttons */
+.btn {
+    padding: 5px 10px;
+    border: 1px solid #aaa;
+    background: #ddd;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+/* Total */
+.total {
+    text-align: right;
+    margin-top: 20px;
+    font-weight: bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>User cart and previous order:</h2>
+
+    <!-- ✅ MY ORDERS -->
+    <div class="section">
+        <h3>My Orders</h3>
+
+        <div th:each="item : ${cartItems}" th:if="${item.status == 'SAVED'}">
+            <p>
+                <b th:text="${item.name}"></b> - ₹
+                <span th:text="${item.price}"></span>
+                <span style="float:right;">Status: Saved</span>
+            </p>
+        </div>
+		
+		<div th:each="item : ${cartItems}" th:if="${item.status == 'ORDERED'}">
+						
+			            <p>
+			                <b th:text="${item.name}"></b> - ₹
+			                <span th:text="${item.price}"></span>
+			                <span style="float:right;">Status: Ordered</span>
+			            </p>
+			        </div>
+
+			    </div>
+
+
+    </div>
+	
+	
+    <!-- ✅ MY CART -->
+    <div class="section">
+        <h3>My Cart</h3>
+
+        <div th:each="item, iStat : ${cartItems}" th:if="${item.status == 'CART'}" class="item">
+
+            <div>
+                <b th:text="${item.name}"></b><br>
+                ₹ <span th:text="${item.price}"></span>
+            </div>
+
+            <div>
+                <!-- REMOVE -->
+                <a th:href="@{/remove(index=${iStat.index})}">
+                    <button class="btn">Remove</button>
+                </a>
+
+                <!-- SAVE -->
+                <a th:href="@{/save(index=${iStat.index})}">
+                    <button class="btn">Save for Later</button>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- TOTAL -->
+        <div class="total">
+            Total: ₹ <span th:text="${total}"></span>
+        </div>
+
+        <div style="text-align:right; margin-top:10px;">
+            <button class="btn">Proceed to Checkout</button>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Online Store</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #efefef;
+    margin: 0;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    padding: 15px;
+    background: #ddd;
+    border-top: 2px solid #999;
+}
+
+.search {
+    padding: 8px;
+    width: 250px;
+    margin-top: 10px;
+}
+
+/* Banner */
+.banner {
+    background: #ccc;
+    padding: 8px;
+    text-align: center;
+    margin: 10px auto;
+    width: 80%;
+}
+
+/* Categories */
+.categories {
+    text-align: center;
+    margin: 15px;
+}
+
+.categories button {
+    padding: 6px 15px;
+    margin: 5px;
+    border: 1px solid #bbb;
+    background: #eee;
+    cursor: pointer;
+}
+
+/* Product Grid */
+.products {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 30px;
+}
+
+/* Product Card */
+.card {
+    background: #fff;
+    padding: 10px;
+    width: 150px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.card img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+}
+
+/* Buttons */
+.card button {
+    margin-top: 5px;
+    padding: 5px;
+    width: 100%;
+    border: 1px solid #aaa;
+    background: #eee;
+    cursor: pointer;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 10px;
+    background: #ddd;
+    font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h3>Welcome to Our Online Store</h3>
+    <input type="text" class="search" placeholder="Search for products...">
+</div>
+
+<div class="banner">
+    <b>Big Sale! Up to 50% off on selected items!</b>
+</div>
+
+<div class="categories">
+    <button>Electronics</button>
+    <button>Clothing</button>
+    <button>Home & Kitchen</button>
+    <button>Sports</button>
+</div>
+
+<!-- ✅ 3 PRODUCTS ONLY -->
+<div class="products">
+
+    <!-- PRODUCT 1 -->
+	<div class="card">
+	<a href="/product?name=Product 1&price=199&desc=This is product 1 description">
+        <img src="/img1.jpg" alt="Product Image">
+        <h5>Product 1</h5>
+        <p>Short description of product 1.</p>
+        <p>₹299</p>
+
+        <form action="/addToCart">
+            <input type="hidden" name="name" value="Product 1">
+            <input type="hidden" name="price" value="299">
+            <button type="submit">Add to Cart</button>
+        </form>
+    </div>
+
+    <!-- PRODUCT 2 -->
+    <div class="card">
+		<a href="/product?name=Product 2&price=199&desc=This is product 2 description">
+        <img src="img2.jpg" alt="Product Image">
+        <h5>Product 2</h5>
+        <p>Short description of product 2.</p>
+        <p>₹199</p>
+
+        <form action="/addToCart">
+            <input type="hidden" name="name" value="Product 2">
+            <input type="hidden" name="price" value="199">
+            <button type="submit">Add to Cart</button>
+        </form>
+    </div>
+
+    <!-- PRODUCT 3 -->
+    <div class="card">
+		<a href="/product?name=Product 3&price=499&desc=This is product 3 description">
+        <img src="/img3.jpg" alt="Product Image">
+        <h5>Product 3</h5>
+        <p>Short description of product 3.</p>
+        <p>₹499</p>
+
+        <form action="/addToCart">
+            <input type="hidden" name="name" value="Product 3">
+            <input type="hidden" name="price" value="499">
+            <button type="submit">Add to Cart</button>
+        </form>
+    </div>
+
+</div>
+
+<div class="footer">
+    © 2024 Online Store. All rights reserved
+</div>
+
+</body>
+</html>
