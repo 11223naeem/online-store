@@ -6,6 +6,8 @@ import com.naeem.demo.model.Cart;
 
 public interface CartRepository extends JpaRepository<Cart, Integer> {
 
+	List<Cart> findByStatus(String string);
+
    
 
 }

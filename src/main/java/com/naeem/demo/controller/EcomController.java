@@ -135,5 +135,17 @@ public class EcomController {
 
 	        return "redirect:/cart";
 	    }
+	    
+	    @GetMapping("/checkout")
+	    public String checkout() {
+
+	        for (Cart item : cartList) {
+	            if (item.getStatus().equals("CART")) {
+	                item.setStatus("ORDERED");
+	            }
+	        }
+
+	        return "redirect:/cart";
+	    }
 	
 }
